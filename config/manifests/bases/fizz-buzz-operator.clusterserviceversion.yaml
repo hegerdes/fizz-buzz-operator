@@ -1,0 +1,51 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: fizz-buzz-operator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: The definition of a new fizz-buzz instance
+      displayName: Instance
+      kind: Instance
+      name: instances.fizz-buzz.hegerdes.com
+      statusDescriptors:
+      - description: Conditions store the status conditions of the Fizz-Buzz instances
+        displayName: Conditions
+        path: conditions
+      version: v1alpha1
+  description: Fizz-Buzz in k8s
+  displayName: fizz-buzz
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - fun
+  links:
+  - name: Fizz Buzz Operator
+    url: https://fizz-buzz-operator.domain
+  maintainers:
+  - email: hegerdes@outlook.de
+    name: hegerdes
+  maturity: alpha
+  provider:
+    name: hegerdes
+  version: 0.0.0

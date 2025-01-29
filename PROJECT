@@ -10,4 +10,14 @@ plugins:
   scorecard.sdk.operatorframework.io/v2: {}
 projectName: fizz-buzz-operator
 repo: github.com/hegerdes/fizz-buzz-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: hegerdes.com
+  group: fizz-buzz
+  kind: Instance
+  path: github.com/hegerdes/fizz-buzz-operator/api/v1alpha1
+  version: v1alpha1
 version: "3"

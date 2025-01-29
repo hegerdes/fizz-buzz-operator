@@ -1,0 +1,23 @@
+# permissions for end users to view instances.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: fizz-buzz-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: instance-viewer-role
+rules:
+- apiGroups:
+  - fizz-buzz.hegerdes.com
+  resources:
+  - instances
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - fizz-buzz.hegerdes.com
+  resources:
+  - instances/status
+  verbs:
+  - get
