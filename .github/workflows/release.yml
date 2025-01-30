@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  security-events: write
+  attestations: write
+
+jobs:
+  docker-release:
+    uses: hegerdes/helper-suite/.github/workflows/reusable-docker-build.yml@main
+    with:
+      build-name: ${{ github.repository_owner }}/fizz-buzz-operator,ghcr.io/${{ github.repository_owner }}/fizz-buzz-operator
+      build-tags: ${{ github.ref_name }}
+      sign-with-github: true
+      build-args: |
+        COMMIT_HASH=${{ github.sha }}
+        COMMIT_TAG=${{ github.ref_name }}
+      build-labels: MAINTAINER=${{ github.repository_owner }}
+      build-platforms: linux/amd64,linux/arm64
+    secrets:
+      REGISTRY_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+      REGISTRY_PW: ${{ secrets.DOCKERHUB_TOKEN }}
+      COSIGN_KEY_OR_KMS: ${{ secrets.COSIGN_KEY_STORE }}
+
+  gh-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "^1.23"
+
+      - name: Run GoReleaser Test Build
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: latest
+          workdir: k8s-admission
+          args: release --clean --snapshot

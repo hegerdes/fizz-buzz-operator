@@ -1,0 +1,103 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+
+# The lines below are called `modelines`. See `:help modeline`
+# Feel free to remove those if you don't want/need to use them.
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+version: 2
+project_name: fizz-buzz-operator
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod tidy
+    # you may remove this if you don't need go generate
+    - go generate ./...
+
+builds:
+  - binary: fizz-buzz
+    main: cmd/main.go
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - format: tar.gz
+    # this name template makes the OS and Arch compatible with the results of `uname`.
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+
+release:
+  # What to do with the release notes in case there the release already exists.
+  #
+  # Valid options are:
+  # - `keep-existing`: keep the existing notes
+  # - `append`: append the current release notes to the existing notes
+  # - `prepend`: prepend the current release notes to the existing notes
+  # - `replace`: replace existing notes
+  #
+  # Default is `keep-existing`.
+  mode: prepend
+
+  # This allows to change which tag GitHub will create.
+  # Usually you'll use this together with `target_commitish`, or if you want to
+  # publish a binary from a monorepo into a public repository somewhere, without
+  # the tag prefix.
+  #
+  # Since: v1.19 (pro)
+  # Default: '{{ .PrefixedCurrentTag }}'
+  # Templates: allowed
+  # tag: "{{ .CurrentTag }}"
+
+  # Header for the release body.
+  #
+  # Templates: allowed
+  # header: |
+  #   ## fizz-buzz ({{ .Version }})
+
+  #   Welcome to this new release! 🥳
+
+  #   With this release new container images have been pushed to the GitHub registry.
+
+  # Header for the release body.
+  #
+  # This feature is only available in GoReleaser Pro.
+  # Since v1.20 (pro)
+
+  # Footer for the release body.
+  #
+  # Templates: allowed
+  footer: |
+    ## Thanks
+
+    Those were the changes on {{ .Tag }}! 🚀
+
+  # You can change the name of the release.
+  #
+  # Default: '{{.Tag}}' ('{{.PrefixedTag}}' on Pro)
+  # Templates: allowed
+  name_template: "fizz-buzz-operator-{{.Version}}"
+
+  # Templates: allowed
+  extra_files:
+    - glob: ./charts/*.tgz
+    - glob: ./charts/*.yaml
+    - glob: ./config/crd/bases/*.yaml
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^debug:"

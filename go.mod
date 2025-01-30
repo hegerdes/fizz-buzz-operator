@@ -1,6 +1,6 @@
 module github.com/hegerdes/fizz-buzz-operator
 
-go 1.22.0
+go 1.23.5
 
 require (
 	github.com/onsi/ginkgo/v2 v2.19.0

@@ -38,7 +38,7 @@ var _ = Describe("Instance Controller", func() {
 
 		typeNamespacedName := types.NamespacedName{
 			Name:      resourceName,
-			Namespace: "default", // TODO(user):Modify as needed
+			Namespace: "default",
 		}
 		instance := &fizzbuzzv1alpha1.Instance{}
 
@@ -51,7 +51,11 @@ var _ = Describe("Instance Controller", func() {
 						Name:      resourceName,
 						Namespace: "default",
 					},
-					// TODO(user): Specify other spec details if needed.
+					Spec: fizzbuzzv1alpha1.InstanceSpec{
+						Prefix: "test",
+						Limit:  10,
+						Image:  "docker.io/rancher/cowsay:latest",
+					},
 				}
 				Expect(k8sClient.Create(ctx, resource)).To(Succeed())
 			}

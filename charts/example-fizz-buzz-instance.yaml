@@ -1,10 +1,7 @@
 apiVersion: fizz-buzz.hegerdes.com/v1alpha1
 kind: Instance
 metadata:
-  labels:
-    app.kubernetes.io/name: fizz-buzz-operator
-    app.kubernetes.io/managed-by: kustomize
-  name: instance-sample
+  name: hire-me
 spec:
   prefix: hire-me
   limit: 15
