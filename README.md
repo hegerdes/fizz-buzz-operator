@@ -1,5 +1,5 @@
 # fizz-buzz-operator
-The most famous coding challenge for interviews that proves that you build ... an advanced hello-world?  
+The most famous coding challenge for interviews that proves that you build ... an advanced hello-world?
 
 Now show off your skills by adding Kubernetes to your fizz-buzz tool-belt.
 
@@ -35,7 +35,7 @@ spec:
 
 
 ## Development
-**Prerequisites:**  
+**Prerequisites:**
 - go version v1.22.0+
 - docker version 17.03+.
 - kubectl version v1.25+.

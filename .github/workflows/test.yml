@@ -18,10 +18,26 @@ jobs:
         with:
           go-version: "^1.23"
 
+      - name: Run Build
+        run: make
+
+      # - name: Run Lint
+      #   run: make lint
+
       - name: Create kind cluster
         uses: helm/kind-action@v1
 
       - name: Run Tests
-        run: |
-          make lint
-          make test
+        run: make test
+
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
