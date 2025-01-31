@@ -27,7 +27,7 @@ builds:
       - arm64
 
 archives:
-  - format: tar.gz
+  - formats: tar.gz
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
       {{ .ProjectName }}_
@@ -62,17 +62,15 @@ release:
   # Header for the release body.
   #
   # Templates: allowed
-  # header: |
-  #   ## fizz-buzz ({{ .Version }})
+  header: |
+    ## fizz-buzz-operator ({{ .Version }})
 
-  #   Welcome to this new release! 🥳
+    Welcome to this new release! 🥳
 
-  #   With this release new container images have been pushed to the GitHub registry.
+    With this release new container images have been pushed to the DockerHub and GitHub registry.
+    Binary files can also be downloaded in the below assets.
 
-  # Header for the release body.
-  #
-  # This feature is only available in GoReleaser Pro.
-  # Since v1.20 (pro)
+    To install the fizz-buzz-operator you can either use the below helm chart or the install manifests.
 
   # Footer for the release body.
   #
@@ -91,7 +89,9 @@ release:
   # Templates: allowed
   extra_files:
     - glob: ./charts/.ci-build/*.tgz
+      name_template: helm-chart-fizz-buzz-operator-{{ .Tag }}.tgz
     - glob: ./charts/install.yaml
+      name_template: fizz-buzz-operator-install-manifests-{{ .Tag }}
 
 changelog:
   sort: asc

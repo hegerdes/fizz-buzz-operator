@@ -54,7 +54,7 @@ jobs:
           helm dependency update charts/fizz-buzz-operator
           helm package charts/fizz-buzz-operator --version ${{ github.ref_name }} --app-version ${{ github.ref_name }} --destination charts/.ci-build
 
-      - name: Run GoReleaser Test Build
+      - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
           version: latest
