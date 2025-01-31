@@ -62,7 +62,7 @@ jobs:
       - name: Install helm plugins
         run: |
           helm plugin install https://github.com/losisin/helm-values-schema-json.git
-          curl -sSL -O helm-docs.tar.gz https://github.com/norwoodj/helm-docs/releases/download/v${{ env.HELM_DOCS_VERSION }}/helm-docs_${{ env.HELM_DOCS_VERSION }}_Linux_x86_64.tar.gz
+          curl -sL --output helm-docs.tar.gz https://github.com/norwoodj/helm-docs/releases/download/v${{ env.HELM_DOCS_VERSION }}/helm-docs_${{ env.HELM_DOCS_VERSION }}_Linux_x86_64.tar.gz
           tar -xzvf helm-docs.tar.gz -C /usr/local/bin
 
       - name: Run pre-commit
