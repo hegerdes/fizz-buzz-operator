@@ -91,8 +91,7 @@ release:
   # Templates: allowed
   extra_files:
     - glob: ./charts/*.tgz
-    - glob: ./charts/*.yaml
-    - glob: ./config/crd/bases/*.yaml
+    - glob: ./charts/install.yaml
 
 changelog:
   sort: asc

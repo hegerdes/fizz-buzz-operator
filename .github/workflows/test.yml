@@ -30,6 +30,14 @@ jobs:
       - name: Run Tests
         run: make test
 
+  reusable-test-helm:
+    uses: hegerdes/helper-suite/.github/workflows/reusable-helm-package.yml@main
+    with:
+      chart-sources-dir: charts/fizz-buzz-operator
+      chart-test-config-dir: charts
+      chart-publish: false
+      chart-release-version: "0.1.0"
+
   pre-commit:
     runs-on: ubuntu-latest
     steps:

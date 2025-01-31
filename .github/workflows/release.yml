@@ -5,7 +5,7 @@ on:
     tags: ["v*"]
 
 permissions:
-  contents: read
+  contents: write
   packages: write
   id-token: write
   security-events: write
@@ -16,7 +16,7 @@ jobs:
     uses: hegerdes/helper-suite/.github/workflows/reusable-docker-build.yml@main
     with:
       build-name: ${{ github.repository_owner }}/fizz-buzz-operator,ghcr.io/${{ github.repository_owner }}/fizz-buzz-operator
-      build-tags: ${{ github.ref_name }}
+      build-tags: ${{ github.ref_name }},latest
       sign-with-github: true
       build-args: |
         COMMIT_HASH=${{ github.sha }}
@@ -44,4 +44,4 @@ jobs:
         with:
           version: latest
           workdir: k8s-admission
-          args: release --clean --snapshot
+          args: release --clean
