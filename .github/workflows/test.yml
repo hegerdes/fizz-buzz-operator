@@ -30,7 +30,7 @@ jobs:
       - name: Run Tests
         run: make test
 
-  reusable-test-helm:
+  helm-chart-test:
     uses: hegerdes/helper-suite/.github/workflows/reusable-helm-package.yml@main
     with:
       chart-sources-dir: charts/fizz-buzz-operator
@@ -46,6 +46,14 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v3
+
+      - name: Install helm
+        uses: azure/setup-helm@v4
+
+      - name: Install helm plugings
+        run: |
+          helm plugin install https://github.com/losisin/helm-values-schema-json.git
+          brew install norwoodj/tap/helm-docs
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1

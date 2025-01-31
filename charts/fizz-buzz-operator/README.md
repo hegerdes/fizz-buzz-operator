@@ -4,6 +4,12 @@
 
 A Helm chart for Kubernetes
 
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Henrik Gerdes | <hegerdes@outlook.de> |  |
+
 ## Values
 
 | Key | Type | Default | Description |

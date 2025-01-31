@@ -4,3 +4,6 @@ description: A Helm chart for Kubernetes
 name: fizz-buzz-operator
 type: application
 version: 0.1.0
+maintainers:
+  - name: Henrik Gerdes
+    email: hegerdes@outlook.de
