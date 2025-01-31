@@ -8,7 +8,7 @@ A Helm chart for Kubernetes
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Henrik Gerdes | <hegerdes@outlook.de> |  |
+| hegerdes | <hegerdes@outlook.de> |  |
 
 ## Values
 

@@ -5,5 +5,5 @@ name: fizz-buzz-operator
 type: application
 version: 0.1.0
 maintainers:
-  - name: Henrik Gerdes
+  - name: hegerdes
     email: hegerdes@outlook.de
