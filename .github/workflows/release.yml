@@ -59,5 +59,4 @@ jobs:
         uses: goreleaser/goreleaser-action@v6
         with:
           version: latest
-          workdir: k8s-admission
           args: release --clean
