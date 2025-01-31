@@ -11,6 +11,9 @@ permissions:
   security-events: write
   attestations: write
 
+env:
+  GO_VERSION: ^1.23
+
 jobs:
   docker-release:
     uses: hegerdes/helper-suite/.github/workflows/reusable-docker-build.yml@main
@@ -33,11 +36,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "^1.23"
+          go-version: "${{ env.GO_VERSION }}"
+
+      - name: Install helm
+        uses: azure/setup-helm@v4
+
+      - name: Package Charts
+        run: |
+          # Package charts
+          mkdir -p charts/.ci-build
+          echo "Setting chart version to ${{ github.ref_name }} and app version to ${{ github.ref_name }}"
+          helm dependency update charts/fizz-buzz-operator
+          helm package charts/fizz-buzz-operator --version ${{ github.ref_name }} --app-version ${{ github.ref_name }} --destination charts/.ci-build
 
       - name: Run GoReleaser Test Build
         uses: goreleaser/goreleaser-action@v6

@@ -90,7 +90,7 @@ release:
 
   # Templates: allowed
   extra_files:
-    - glob: ./charts/*.tgz
+    - glob: ./charts/.ci-build/*.tgz
     - glob: ./charts/install.yaml
 
 changelog:
